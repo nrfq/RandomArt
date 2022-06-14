@@ -368,6 +368,10 @@ namespace Random_Art
 
         static void Main(string[] args)
         {
+            if(args.Length != 3){
+                Console.WriteLine("Usage: dotnet run Program [width] [height]");
+                return;
+            }
             //Get assembly you're running from
             var runningAssembly = Assembly.GetExecutingAssembly();
             var expressionTypes0 = new List<Type>();
@@ -389,7 +393,7 @@ namespace Random_Art
             Expression appliedExpression = createExpression(expressionTypes0, expressionTypes1, 20);
 
             // Take a predefined image for size and format
-            Bitmap bmp = new Bitmap(Image.FromFile("bigtest.png"));
+            Bitmap bmp = new Bitmap(int.Parse(args[1]), int.Parse(args[2]), PixelFormat.Format32bppRgb);
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
             BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
 
